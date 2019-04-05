@@ -1,4 +1,4 @@
-﻿package com.springmvc.test.web.comment;
+package com.springmvc.test.web.comment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
