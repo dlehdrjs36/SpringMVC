@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user"> 
+<!--  전체조회  -->
+<select id="getUsers" resultType="user" parameterType="userSearch"> <!--  user는 sql-map-comfig 파일에서 설정한 alias, selete는 반드시 resultType이 필요함.(조회결과) -->
+select * from (  select u.*, rownum rn from (
+SELECT * FROM users 
+<where>
+	<if test="ids != null">
+	id in 
+	<foreach collection="ids" open="(" close= ")" separator="," item="item"> <!--  여기서 item 속성은 c:forEach에서 var속성과 같음 -->
+		#{item}
+	</foreach> <!--  collection="" 은 넘겨주는 배열 이름을 적어줌. -->
+	</if>
+	<if test="searchCondition == 'id'">
+		and id like '%' || #{searchKeyword} || '%' <!--  #{searchKeyword} = '값' , 숫자라면 숫자로 들어감 6 -->
+	</if>
+	<if test="searchCondition == 'name'">
+		and name like '%' || #{searchKeyword} || '%'
+	</if>
+	<if test="role != null and role != '' ">
+		and role = #{role}  <!--  #은 ' ' 붙여서 출력, $는 데이터타입에 맞춰서 출력한다는 차이점이 있음 상황에 맞게 사용. -->
+	</if>
+</where>
+ORDER BY
+<choose>
+	<when test="sort != null and sort != '' ">
+		${sort}
+	</when>
+	<otherwise>
+		ID
+	</otherwise>
+</choose>
+<!--  swith(choose)와 밑의 if문은 같은 의미 -->
+<!-- <if test="sort != null and sort != '' ">
+	 ${sort}  sort = 'id'  ${id} = id , #{id} = 'id' order by절은 컬럼명만 들어가야함. ${} 사용
+	</if>
+	<if test="sort == null or sort == '' ">
+	 id 
+	</if> -->
+) u     ) a where rn between #{start} and #{end}
+</select>
+<!--  전체건수 구하기 -->
+<select id="getCnt" resultType="int" parameterType="userSearch"> <!--  resultType="int" 결과값으로 int(정수) -->
+	select count(*)
+	  from users
+		 <where>
+			<if test="ids != null">
+			id in 
+			<foreach collection="ids" open="(" close= ")" separator="," item="item"> <!--  여기서 item 속성은 c:forEach에서 var속성과 같음 -->
+				#{item}
+			</foreach> <!--  collection="" 은 넘겨주는 배열 이름을 적어줌. -->
+			</if>
+			<if test="searchCondition == 'id'">
+				and id like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'name'">
+				and name like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+</select>
+
+<!--  단건조회   -->
+<select id="getUser" parameterType="user" resultType="user">
+<![CDATA[ 
+SELECT * FROM users WHERE ID = #{id} and rownum < 2
+]]>
+</select>
+<!--  496p, dml구문 구분하기위해서 사용한것.(insert,update... insert안에  update문 써도 정상동작 -->
+<!--  등록  -->
+<insert id="insertUser" parameterType="user"> <!--  parameterType="user" dto는 데이터타입이 정해져있기때문에 생략가능(적어주는게좋음), user는 UserDTO를 의미 alias. -->
+	insert into users(id, password, name, role)
+	values ( #{id},
+	         #{passWord},
+	         #{name},
+	         #{role} ) <!--  #{id} 는 UserDTO의 getId를 의미함. #{}가있으면 parameterType 속성필요. -->
+</insert> <!--  id="action+테이블명" , ${}(jsp) == #{}(mybatis) -->
+<!--  수정   -->
+<update id="updateUser" parameterType="user">
+	update users
+	   set password = #{passWord},
+	       name = #{name},
+	       role = #{role}
+	 where id = #{id}
+</update>
+<!--  삭제   -->
+<update id="deleteUser" parameterType="user">
+	delete from users
+	 where id = #{id}
+</update>
+</mapper> 

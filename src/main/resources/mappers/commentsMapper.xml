@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comments">
+
+<update id="updateCnt" parameterType="board"> 
+		UPDATE MVC_BOARD
+		SET board_hit = board_hit+1
+		WHERE board_id = #{boardId}
+</update>
+<select id="getBoardCount" resultType="int"> 
+		SELECT count(*) totalCount FROM MVC_BOARD
+</select>
+<select id="getBoard" resultType="board" parameterType="board"> 
+		SELECT * 
+		FROM MVC_BOARD 
+		WHERE board_id = #{boardId}
+</select>
+	
+<select id="getBoardList" resultType="board" parameterType="boardPaging"> 
+		SELECT A.* FROM ( SELECT B.*, ROWNUM RN FROM ( 
+														SELECT BOARD_ID           
+															   ,BOARD_WRITER         
+															   ,BOARD_HIT      
+															   ,BOARD_TITLE
+															   ,BOARD_DATE
+															   ,BOARD_GROUP
+															   ,BOARD_STEP
+															   ,BOARD_SEQ
+															   ,BOARD_CONTENT
+															   ,BOARD_FILE
+														  FROM MVC_BOARD
+														 ORDER BY BOARD_ID
+													   ) B 
+						 ) A
+		  <![CDATA[ 
+		 WHERE RN between #{start} and #{end}
+		 ]]> 
+	</select>
+	
+	<select id="getCommentsList" resultType="comments" parameterType="comments"> 
+		SELECT A.* FROM ( SELECT B.*, ROWNUM RN FROM ( 
+		SELECT SEQ            
+			   ,NAME         
+			   ,CONTENT      
+			   ,BOARD_ID
+			   ,REGDATE
+		  FROM COMMENTS  
+		 WHERE BOARD_ID = #{boardId}
+		  <if test="seq != null and seq != ''"> <!--  제일처음에는 마지막댓글번호 모르기때문에  pageUnit만큼의 데이터를 가져옴, 이후에는 해당댓글보다 큰 댓글번호만 pageUnit만큼  가져옴.-->
+		  <![CDATA[ 
+		  	and seq > #{seq}
+		  ]]>
+		  </if> <!-- 기준이 되는 댓글번호(마지막댓글번호) -->
+		 ORDER BY SEQ DESC 
+		 ) B ) A
+		  <![CDATA[ 
+		 WHERE RN <= #{pageUnit} 
+		 ]]> <!-- 한번에 가져올 댓글 수 -->
+	</select>
+	
+		<select id="getComments" resultType="comments" parameterType="comments"> 
+		SELECT SEQ            
+			   ,NAME         
+			   ,CONTENT      
+			   ,BOARD_ID
+			   ,REGDATE
+		  FROM COMMENTS  
+		 WHERE seq = #{seq}
+	</select>
+	
+	<insert id="insertComments" parameterType="comments">
+		<selectKey keyProperty="seq" resultType="string" order="BEFORE">
+			select nvl(max(seq),0)+1 from comments
+		</selectKey>
+		INSERT INTO COMMENTS(
+				  SEQ  
+				, NAME
+				, CONTENT
+				, BOARD_ID
+				, REGDATE
+				) 
+			VALUES(
+				  #{seq}
+				, #{name}
+				, #{content}
+				, #{boardId}
+				, SYSDATE
+				)
+	</insert>
+	
+	<update id="updateComments" parameterType="comments">
+		update  COMMENTS SET 
+				name = #{name}
+			    ,content = #{content} 
+	     where  seq = #{seq}
+	</update>
+	
+	<delete id="deleteComments" parameterType="comments">
+		delete COMMENTS 
+		 <where> 
+		 	<choose>
+		 		<when test="boardId != null and boardId != ''">
+		 			boardId = #{boardId}	 <!--  댓글번호가 넘어오면 해당하는 댓글만 제거  -->
+		 		</when>
+		 		<otherwise>
+		 			seq = #{seq} <!--  게시글이 지워지면 게시글에해당하는 댓글 다 지워짐. -->
+		 		</otherwise>
+		 	</choose>
+		 </where>
+	</delete>
+</mapper>

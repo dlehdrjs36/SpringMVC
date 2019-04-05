@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<!-- 이미 스프링컨테이너에 DataSource에 대한 정보가 bean등록 되어있기때문에 기존에 존재하는 DataSource를 
+		이용한다. <properties resource="db.properties" /> <environments default="development"> 
+		<environment id="development"> <transactionManager type="JDBC" /> <dataSource 
+		type="POOLED"> <property name="driver" value="${jdbc.driverClassName}" /> 
+		<property name="url" value="${jdbc.url}" /> <property name="username" value="${jdbc.username}" 
+		/> <property name="password" value="${jdbc.password}" /> </dataSource> </environment> 
+		</environments> -->
+	<!-- mapper 파일의 위치를 bean 등록한 SqlSessionFactoryBean에서 setter 의존성 주입해주기 때문에 
+		없어도 된다. <mappers> <mapper resource="#package/#mapper.xml" /> </mappers> -->
+
+
+	<!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<typeAliases>
+	<!--클래스에 대한 별칭. ORACLE의 SYNONYM과 유사 -->
+	<!-- type에 들어가는 클래스 위치가 틀리면 에러발생 -->
+		<typeAlias alias="fileUploadDTO"
+			type="com.springmvc.test.fileupload.FileUploadDTO"></typeAlias>
+		<typeAlias type="com.springmvc.test.web.websocket.UserDTO"
+			alias="user" />
+		<typeAlias type="com.springmvc.test.web.websocket.UserSearchDTO"
+			alias="userSearch" />	
+			
+		<typeAlias type="com.springmvc.test.web.jackson.UserDTO"
+			alias="user2" />
+		<typeAlias type="com.springmvc.test.web.jackson.UserSearchDTO"
+			alias="userSearch2" />	
+		<typeAlias type="com.springmvc.test.web.comment.BoardPagingDTO"
+			alias="boardPaging" />
+		<typeAlias type="com.springmvc.test.web.comment.BoardDTO"
+			alias="board" />
+		<typeAlias type="com.springmvc.test.web.comment.CommentsVO"
+			alias="comments" />
+		
+		<typeAlias type="com.springmvc.test.web.rest.RestDTO"
+			alias="user3" />
+	</typeAliases>
+
+
+</configuration>
