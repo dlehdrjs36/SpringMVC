@@ -7,5 +7,5 @@
 <title>로컬스토리지 이용한 장바구니 구현</title>
 <body>
 <% response.sendRedirect("http://192.168.1.16:800"); %>
-</body>
+</body>  
 </html>
