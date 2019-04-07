@@ -11,7 +11,7 @@
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>  
-var goodsList;    
+var goodsList;       
  
 /* 페이지 렌더링이 완료되면 수행되는 함수  */
 $(function(){
