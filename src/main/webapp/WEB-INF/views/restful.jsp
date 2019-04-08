@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -176,15 +177,13 @@
 </head>
 <body>
 <h1> 확인하기 </h1>
-${pageContext.request.requestURL}
-
-${pageContext.request.requestURI}
-
-${pageContext.request.contextPath}
-
-<h3><a href="<%= request.getContextPath()%>/users.html"><%= request.getContextPath() %>/users.html</a></h3>
-<h3>${co}<%= request.getContextPath() %>/users.json</h3>
-<h3><%= request.getContextPath() %>/users.xml</h3>
+<p>"pageContext.request.requestURL" : ${pageContext.request.requestURL}</p>
+<p>"pageContext.request.requestURI" : ${pageContext.request.requestURI}</p>
+<p>"pageContext.request.contextPath" : ${pageContext.request.contextPath}</p>
+<h2> Rest API</h2>
+<h3><a href="<c:url value="/users.html"/>">HTML : <c:url value="/users.html"/></a><br></h3>
+<h3><a href="<c:url value="/users.json"/>">JSON : <c:url value="/users.json"/></a><br></h3>
+<h3><a href="<c:url value="/users.xml"/>">XML : <c:url value="/users.xml"/></a><br></h3>
 <hr>
 
 <div class="container">
