@@ -175,6 +175,18 @@
 </script>
 </head>
 <body>
+<h1> 확인하기 </h1>
+${pageContext.request.requestURL}
+
+${pageContext.request.requestURI}
+
+${pageContext.request.contextPath}
+
+<h3><a href="<%= request.getContextPath()%>/users.html"><%= request.getContextPath() %>/users.html</a></h3>
+<h3>${co}<%= request.getContextPath() %>/users.json</h3>
+<h3><%= request.getContextPath() %>/users.xml</h3>
+<hr>
+
 <div class="container">
 	<form id="form1"  class="form-horizontal">
 		<h2>사용자 등록 및 수정</h2>

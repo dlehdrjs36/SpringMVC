@@ -141,8 +141,8 @@
 					패키지 - validation()</a></li>	
 			<li><a href="./getBoardList.do"> com.springmvc.test.web.comments
 					패키지 - 댓글기능 - 게시글 조회</a></li>
-			<li><a href="./restful.do"> com.springmvc.test.web.rest
-					패키지 - rest방식의 crud 수행</a></li>			
+			<li><a href="./users"> com.springmvc.test.web.rest
+					패키지 - rest방식의 crud 수행(Rest Api)</a></li>			
 		</ul>
 	</div>
 </body>

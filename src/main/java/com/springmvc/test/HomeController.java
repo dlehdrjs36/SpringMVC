@@ -40,11 +40,6 @@ public class HomeController {
 		return "broadcast";
 	}
 	
-	@RequestMapping(value = "/restful.do", method = RequestMethod.GET)
-	public String rest() {
-		return "restful";
-	}
-	
 	//Rest Api, Html 부분
 	@RequestMapping(value = "/users"
 					,method = RequestMethod.GET
