@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 /***
+ * XML 마샬링 
  * @XmlRootElement(name ="userList")
  * - Xml 문서는 반드시 단 하나의 루트 엘리먼트를 가져야 한다. 
  * - 우리가 원하는것은 여러 개의 UserDTO 정보를 담는 것이다.

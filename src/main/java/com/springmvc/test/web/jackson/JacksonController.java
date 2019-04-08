@@ -21,7 +21,8 @@ public class JacksonController {
 	UserService userService;
 	
 	// JavaObject -> Json으로 형변환되어 값을 반환한다. 데이터는 http 응답프로토콜 몸체에 담긴다.
-	@RequestMapping(value = "/getJsonMemberList.do")
+	@RequestMapping(value = "/getJsonMemberList.do"
+					,produces="application/json")
 	@ResponseBody
 	public List<UserDTO> getJsonMemberList(UserSearchDTO vo,
 							Paging paging) {
@@ -42,7 +43,8 @@ public class JacksonController {
 	}
 	
 	// JavaObject -> Xml으로 형변환하여 값을 반환한다. 데이터는 http 응답프로토콜 몸체에 담긴다.
-	@RequestMapping(value = "/getJsonMemberList2.do")
+	@RequestMapping(value = "/getJsonMemberList2.do"
+					,produces="application/xml")
 	@ResponseBody
 	public UserListDTO getJsonMemberList2(UserSearchDTO vo, Paging paging) {
 		// 페이지번호 파라미터
