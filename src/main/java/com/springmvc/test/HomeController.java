@@ -45,4 +45,9 @@ public class HomeController {
 		return "restful";
 	}
 	
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public String restHtml() {
+		return "restful";
+	}
+	
 }
