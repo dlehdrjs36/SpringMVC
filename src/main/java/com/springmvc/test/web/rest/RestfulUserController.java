@@ -17,6 +17,7 @@ public class RestfulUserController {
 	@Autowired
 	RestService userService;
 	
+	//Rest Api, Xml, Json 영역
 	//전체조회
 	@RequestMapping(value="/users"
 					,method=RequestMethod.GET
