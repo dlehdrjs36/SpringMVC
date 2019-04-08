@@ -26,9 +26,9 @@ public class ReportController {
 	public void report(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			String reportPath = request.getSession().getServletContext().getRealPath("/resource/report3.jrxml");
+			String reportPath = request.getSession().getServletContext().getRealPath("/resources/report3.jrxml");
 			System.out.println(reportPath);
-			String reportLogo =  request.getSession().getServletContext().getRealPath("/resource/invoice_logo.png");
+			String reportLogo =  request.getSession().getServletContext().getRealPath("/resources/invoice_logo.png");
 			
 			// 로컬 경로에서 report 파일 읽어들임
 			/*String reportLogo = "C:\\Users\\User\\git\\Spring\\SpringMVC\\src\\main\\webapp\\resources\\invoice_logo.png";
@@ -39,7 +39,7 @@ public class ReportController {
 			
 			/* 서버의 경로에서 파일을 찾음.*/
 			JasperReport report = JasperCompileManager
-					.compileReport(request.getSession().getServletContext().getRealPath("/resource/report3.jrxml"));
+					.compileReport(request.getSession().getServletContext().getRealPath("/resources/report3.jrxml"));
 			
 			JRDataSource JRdataSource = new JRBeanCollectionDataSource(fileUploadService.getReportBoard2());
 			map.put("reportLogo", reportLogo);
