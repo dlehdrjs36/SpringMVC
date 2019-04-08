@@ -19,7 +19,8 @@ public class RestfulUserController {
 	
 	//전체조회
 	@RequestMapping(value="/users"
-					,method=RequestMethod.GET)
+					,method=RequestMethod.GET
+					,produces={"application/xml", "application/json"})
 	public Map<String,Object> getUserList(Model model, RestDTO vo) {
 		Map<String,Object> result = new HashMap<String, Object>();
 		result.put("data", userService.getUsers(vo) );
