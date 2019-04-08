@@ -64,11 +64,18 @@ public class ReportController {
 	public void reportChart(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			String reportLogo = "C:\\Users\\User\\git\\Spring\\SpringMVC\\src\\main\\webapp\\resources\\flower1.png";
+			
+			//String reportLogo = "C:\\Users\\User\\git\\Spring\\SpringMVC\\src\\main\\webapp\\resources\\flower1.png";
+			String reportLogo =  request.getSession().getServletContext().getRealPath("/resources/flower1.png");
 			// 로컬 경로에서 report 파일 읽어들임
-			JasperReport report = JasperCompileManager
+			/*JasperReport report = JasperCompileManager
 					.compileReport("C:\\Users\\User\\git\\Spring\\SpringMVC\\src\\main\\webapp\\resources\\chart_report.jrxml");
-
+			 */
+			
+			/* 서버의 경로에서 파일을 찾음.*/
+			JasperReport report = JasperCompileManager
+					.compileReport(request.getSession().getServletContext().getRealPath("/resources/chart_report.jrxml"));
+			
 			JRDataSource JRdataSource = new JRBeanCollectionDataSource(fileUploadService.getReportBoard3());
 			map.put("reportLogo", reportLogo);
 			
