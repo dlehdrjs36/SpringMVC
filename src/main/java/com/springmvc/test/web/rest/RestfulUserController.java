@@ -19,7 +19,7 @@ public class RestfulUserController {
 	
 	//전체조회
 	@RequestMapping(value="/users"
-					,consumes= {"application/json, application/xml"}    //요청헤더
+					,consumes= {"application/json","application/xml"}    //요청헤더
 					,method=RequestMethod.GET)
 	public Map<String,Object> getUserList(Model model, RestDTO vo) {
 		Map<String,Object> result = new HashMap<String, Object>();
