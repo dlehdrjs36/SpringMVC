@@ -61,7 +61,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 		MsgVO msgvo = mapper.readValue((String) message.getPayload(), MsgVO.class); // String값을 읽어서 MsgVO에 담으라는 뜻 .
 		UserDTO result = new UserDTO();															// 아까받아온 메시지의타입(JSON)을 JAVA OBJECT로 변환하는 작업.
 	
-		//서버에서 클라이언트로 데이터보낼띠 map형태로 보내면 좋음. 전송결과
+		//서버에서 클라이언트로 데이터보낼때 map형태로 보내면 좋음. 전송결과
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("cmd",msgvo.getCmd());
 		// cmd에 따라서 명령어 구분가능.

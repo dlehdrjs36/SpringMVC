@@ -130,15 +130,15 @@
 			<li><a href="./reportChart.do"> com.springmvc.test.web.ireport
 					패키지 - iReport Chart</a></li>
 			<li><a href="./excelCreate.do"> com.springmvc.test.web.excel
-					패키지 - xlsExcel</a></li>	
+					패키지 - xlsExcel(엑셀다운(지정폴더))</a></li>	
 			<li><a href="./xlsxExcelView.do"> com.springmvc.test.web.excel
-					패키지 - xlsxExcel</a></li>
+					패키지 - xlsxExcel(엑셀다운(브라우저 기본설정폴더))</a></li>
 			<li><a href="./commonemail.do"> com.springmvc.test.web.email
-					패키지 - commonemail</a></li>		
+					패키지 - commonemail(메일전송)</a></li>		
 			<li><a href="./javaxemail.do"> com.springmvc.test.web.email
-					패키지 - javaxemail</a></li>	
+					패키지 - javaxemail(메일전송)</a></li>	
 			<li><a href="./validationView.do"> com.springmvc.test.web.validation
-					패키지 - validation()</a></li>	
+					패키지 - validation(서버측에서 유효성검사)</a></li>	
 			<li><a href="./getBoardList.do"> com.springmvc.test.web.comments
 					패키지 - 댓글기능 - 게시글 조회</a></li>
 			<li><a href="./users"> com.springmvc.test.web.rest
