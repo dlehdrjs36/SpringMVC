@@ -96,29 +96,29 @@ package com.springmvc.test.web.comment;
 		public int getPrev_pageno() {
 			return prev_pageno;
 		}
-		public void setPrev_pageno(int prev_pageno) {
-			this.prev_pageno = prev_pageno;
+		public void setPrev_pageno(int prevPageno) {
+			this.prev_pageno = prevPageno;
 		}
 		public int getNext_pageno() {
 			return next_pageno;
 		}
-		public void setNext_pageno(int next_pageno) {
-			this.next_pageno = next_pageno;
+		public void setNext_pageno(int nextPageno) {
+			this.next_pageno = nextPageno;
 		}
-		public void setGroup_no(int group_no) {
-			this.group_no = group_no;
+		public void setGroup_no(int groupNo) {
+			this.group_no = groupNo;
 		}
 		public int getPage_sno() {
 			return page_sno;
 		}
-		public void setPage_sno(int page_sno) {
-			this.page_sno = page_sno;
+		public void setPage_sno(int pageSno) {
+			this.page_sno = pageSno;
 		}
 		public int getPage_eno() {
 			return page_eno;
 		}
-		public void setPage_eno(int page_eno) {
-			this.page_eno = page_eno;
+		public void setPage_eno(int pageEno) {
+			this.page_eno = pageEno;
 		}
 		//displayPage = 15(고정값)
         //prev,next,beginPage,endPage 를 계산해서 만든다.	     

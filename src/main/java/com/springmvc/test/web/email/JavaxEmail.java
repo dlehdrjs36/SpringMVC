@@ -67,7 +67,8 @@ public class JavaxEmail extends AbstractView {
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
 		} catch (MessagingException e) {
-			throw new RuntimeException(e);
+			//throw new RuntimeException(e);
+			e.printStackTrace();
 		}
 		
 		PrintWriter out = res.getWriter();

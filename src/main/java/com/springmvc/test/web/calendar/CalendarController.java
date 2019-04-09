@@ -8,11 +8,11 @@ public class CalendarController {
 	
 	// 목록
 	@RequestMapping(value = "/Auth")
-	public String Auth() {
+	public String auth() {
 		return "calendar";
 	}
 	@RequestMapping(value = "/Auth2")
-	public String Auth2() {
+	public String auth2() {
 		return "c2";
 	}
 }

@@ -12,7 +12,7 @@ import javax.mail.Session;
 import javax.mail.Store;
 
 // javax를 이용한 메일 수신.
-public class javaxEmailReceiver {
+public class JavaxEmailReceiver {
 
 	/**
 	 * * Returns a Properties object which is configured for a POP3/IMAP server *
@@ -145,7 +145,7 @@ public class javaxEmailReceiver {
 		String userName = "slsldkf1234@gmail.com";
 		String password = "gmhrqwtrhpynimhl";
 
-		javaxEmailReceiver receiver = new javaxEmailReceiver();
+		JavaxEmailReceiver receiver = new JavaxEmailReceiver();
 		receiver.downloadEmails(protocol, host, port, userName, password);
 	}
 }

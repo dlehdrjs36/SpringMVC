@@ -120,9 +120,10 @@ public class FileDownloadController {
 				out = new BufferedOutputStream(response.getOutputStream()); 
 				FileCopyUtils.copy(in, out);
 				out.flush(); 
-				out.close();
+				//out.close();
 			} catch (IOException ex) { } 
 			finally { 
+				out.close();
 				in.close(); 
 				response.getOutputStream().flush();
 				response.getOutputStream().close(); 
