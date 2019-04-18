@@ -15,9 +15,13 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<org.apache.tiles-version>3.0.8</org.apache.tiles-version>
 	</properties>
+	
 	<!-- ${project.basedir} 은 pom.xml 파일이 존재하는 프로젝트의 이름을 가져온다 -->
 	<repositories>
 		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
