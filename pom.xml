@@ -33,7 +33,7 @@
 			</releases>
 			<snapshots>
 				<enabled>false</enabled>
-			</snapshots>
+			</snapshots> 
 		</repository>
 	</repositories>
 
