@@ -34,6 +34,13 @@ public class HomeController {
 		return "broadcast";
 	}
 	
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public String login() {
+		return "member/memberLoginForm";
+	}
+	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
+	public void lc() {}
+	
 	//Rest Api, Html 부분
 	@RequestMapping(value = "/users"
 					,method = RequestMethod.GET

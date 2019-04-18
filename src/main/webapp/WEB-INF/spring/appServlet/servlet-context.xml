@@ -23,7 +23,15 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<!-- 데이터 형변환 (JavaObject-Json) 하기 위해서 HttpMessageConverter를 구현 -->
-	<annotation-driven />
+	<annotation-driven>
+		<!-- argument resolver @AuthUser (세션처리) 어노테이션을 처리할 수 있도록 핸들러 설정. -->
+		<!-- bean 등록한 순서대로 모든 argument-resolver가 동작한다. -->
+		<!-- HandlerMethodArgumentResolver의 supportsParameter()에서 MethodParameter를 판단하여 argument-resolver가 동작된다. -->
+		<argument-resolvers>
+		<beans:bean class="com.springmvc.test.web.interceptor.LogOutHandlerMethodArgumentResolver" />
+		<beans:bean class="com.springmvc.test.web.interceptor.AuthUserHandlerMethodArgumentResolver" />	
+		</argument-resolvers>	
+	</annotation-driven>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
@@ -32,15 +40,9 @@
 
 	<!-- ┏Excel 사용을 위한 ViewResolver 등록┓ -->
 	<!-- excel. ExcelxlsxView를 호출할때 사용되는 ViewResolver. -->
-	<beans:bean p:order="2"
+	<beans:bean p:order="3"
 		class="org.springframework.web.servlet.view.BeanNameViewResolver" />
 	<!-- ViewResolver 이용하여 엑셀 파일 생성 -->
-
-	<!-- 타일즈 뷰 <beans:bean p:order="2" class="org.springframework.web.servlet.view.UrlBasedViewResolver" 
-		p:viewClass="org.springframework.web.servlet.view.tiles3.TilesView" /> -->
-	<!-- ┗Excel 사용을 위한 ViewResolver 등록┛ -->
-
-
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -48,7 +50,7 @@
 		받은 결과(화면정보)를 ViewResolver에게 주면, ViewResolver는 화면정보를 완성시켜 DispatcherServlet에게 
 		전달해준다. DispatcherServlet은 완성된 화면정보를 받아서 클라이언트에 보여준다. -->
 
-	<beans:bean p:order="2"
+	<beans:bean p:order="4"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
@@ -196,5 +198,37 @@
 	<!-- 스프링 스케쥴러 설정 (크론탭) -->
 	<task:scheduler id="jobScheduler" pool-size="10" />
 	<task:annotation-driven scheduler="jobScheduler" />
+	
+	<!-- 타일즈 설정 -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		p:order="1"
+		p:viewClass="org.springframework.web.servlet.view.tiles3.TilesView" />
+	<!--Don't add suffix or prefix like you do with .jsp files -->
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- 인터셉터 -->
+	<beans:bean id="loginInterceptor" class="com.springmvc.test.web.interceptor.LoginInterceptor"/>
+<interceptors>
+	<!-- 로그인 처리를 위한 인터셉터(세션등록)-->
+	<interceptor>
+		<mapping path="/user/login"/>	
+		<beans:ref bean="loginInterceptor"/>
+		<!-- <beans:bean class="com.springmvc.test.web.interceptor.LoginInterceptor"/> -->
+	</interceptor>
+	<!-- 세션을 관리하여 각종 권한이 필요한 페이지에 접근 유무 판단하는 인터셉터-->
+	<interceptor>
+		<mapping path="/**" />	
+		<exclude-mapping path="/" />	
+		<exclude-mapping path="/fileUploadView.do" />	
+		<exclude-mapping path="/user/login" />		
+		<beans:bean class="com.springmvc.test.web.interceptor.AuthInterceptor"/>
+	</interceptor>
+</interceptors>
 	
 </beans:beans>

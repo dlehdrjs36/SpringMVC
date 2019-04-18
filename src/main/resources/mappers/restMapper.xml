@@ -34,24 +34,33 @@ ORDER BY 1 desc
 <!--  단건조회   -->
 <select id="getUser" parameterType="user3" resultType="user3">
 <![CDATA[ 
-SELECT * FROM users WHERE ID = #{id} and rownum < 2
+SELECT * FROM users
 ]]>
+<where>
+<if test="id != null and passWord == null ">
+			id = #{id}
+</if>
+<if test="id != null and passWord != null ">
+			id = #{id} AND password = #{passWord}
+</if>
+<![CDATA[ AND rownum < 2]]>
+</where>
 </select>
 <!--  496p, dml구문 구분하기위해서 사용한것.(insert,update... insert안에  update문 써도 정상동작 -->
 <!--  등록  -->
 <insert id="insertUser" parameterType="user3"> <!--  parameterType="user" dto는 데이터타입이 정해져있기때문에 생략가능(적어주는게좋음), user는 UserDTO를 의미 alias. -->
-	insert into users(id, password, name, role)
+	insert into users(id, name, gender, location)
 	values ( #{id},
-	         #{passWord},
 	         #{name},
-	         #{role} ) <!--  #{id} 는 UserDTO의 getId를 의미함. #{}가있으면 parameterType 속성필요. -->
+	         #{gender},
+	         #{location} ) <!--  #{id} 는 UserDTO의 getId를 의미함. #{}가있으면 parameterType 속성필요. -->
 </insert> <!--  id="action+테이블명" , ${}(jsp) == #{}(mybatis) -->
 <!--  수정   -->
 <update id="updateUser" parameterType="user3">
 	update users
-	   set password = #{passWord},
+	   set gender = #{gender},
 	       name = #{name},
-	       role = #{role}
+	       location = #{location}
 	 where id = #{id}
 </update>
 <!--  삭제   -->

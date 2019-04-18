@@ -83,8 +83,8 @@
 		var user = xhr.data;
 		$('input:text[name="userId"]').val(user.id);
 		$('input:text[name="name"]').val(user.name);
-		$('input:radio[name="gender"][value="'+user.passWord+'"]').prop('checked', true);
-		$('select[name="city"]').val(user.role).attr("selected", "selected");
+		$('input:radio[name="gender"][value="'+user.gender+'"]').prop('checked', true);
+		$('select[name="city"]').val(user.location).attr("selected", "selected");
 	}//userSelectResult
 	
 	//사용자 수정 요청
@@ -99,7 +99,7 @@
 			    url: "users", 
 			    type: 'PUT', 
 			    dataType: 'json', 
-			    data: JSON.stringify({ id: userId, name:name, passWord: gender, role: city }),
+			    data: JSON.stringify({ id: userId, name:name, gender: gender, location: city }),
 			    contentType: 'application/json',
 			    mimeType: 'application/json',
 			    success: function(data) { 
@@ -126,12 +126,13 @@
 			    url: "users",  
 			    type: 'POST',  
 			    dataType: 'json', 
-			    data: JSON.stringify({ id: userId, name:name,passWord: gender, role: city }),
+			    data: JSON.stringify({ id: userId, name:name, gender: gender, location: city }),
 			    contentType: 'application/json', 
 			    mimeType: 'application/json',
 			    success: function(response) {
 			    	if(response.result == true) {
 			    		$('#btnInit').click(); //등록완료되면 해당 필드는 초기화.
+			    		alert( userId +"회원 등록완료.");
 			    		userList();
 			    	}
 			    }, 
@@ -165,8 +166,8 @@
 			$('<tr>')
 			.append($('<td>').html(item.id))
 			.append($('<td>').html(item.name))
-			.append($('<td>').html(item.passWord))
-			.append($('<td>').html(item.role))
+			.append($('<td>').html(item.gender))
+			.append($('<td>').html(item.location))
 			.append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
 			.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
 			.append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
@@ -181,9 +182,9 @@
 <p>"pageContext.request.requestURI" : ${pageContext.request.requestURI}</p>
 <p>"pageContext.request.contextPath" : ${pageContext.request.contextPath}</p>
 <h2> Rest API</h2>
-<h3><a href="<c:url value="/users.html"/>">HTML : <c:url value="/users.html"/></a><br></h3>
-<h3><a href="<c:url value="/users.json"/>">JSON : <c:url value="/users.json"/></a><br></h3>
-<h3><a href="<c:url value="/users.xml"/>">XML : <c:url value="/users.xml"/></a><br></h3>
+<h3><a href="<c:url value="/users.html"/>" onclick="window.open(this.href,'_blank','width=800,height=600, location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, scrollbars=yes');return false;">HTML : <c:url value="/users.html"/></a><br></h3>
+<h3><a href="<c:url value="/users.json"/>" onclick="window.open(this.href,'_blank','width=800,height=600, location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, scrollbars=yes');return false;">JSON : <c:url value="/users.json"/></a><br></h3>
+<h3><a href="<c:url value="/users.xml"/>" onclick="window.open(this.href,'_blank','width=800,height=600, location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, scrollbars=yes');return false;">XML : <c:url value="/users.xml"/></a><br></h3>
 <hr>
 
 <div class="container">

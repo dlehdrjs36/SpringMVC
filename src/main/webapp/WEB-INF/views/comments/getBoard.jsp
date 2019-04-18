@@ -137,7 +137,7 @@ $(function(){
 조회수 : ${board.boardHit} <br><br>
 파일 <br>
 <c:forTokens var="path" items="${board.boardFile}" delims=",">
-	<a href="/FileDown.do?atchFileId=${path}">${path}</a><br>
+	<a href="./FileDown.do?atchFileId=${path}">${path}</a><br>
 </c:forTokens>
 <br>
 <a href="./getBoardList.do">목록으로</a>

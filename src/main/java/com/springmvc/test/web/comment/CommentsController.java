@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.springmvc.test.web.interceptor.Auth;
+import com.springmvc.test.web.interceptor.Auth.Role;
+
 @Controller
 public class CommentsController {
 
@@ -21,6 +24,7 @@ public class CommentsController {
 	}
 	
 	//게시글 목록 조회
+	@Auth/*(role=Role.ADMIN)*/
 	@RequestMapping("getBoardList.do")
 	public ModelAndView getBoardList(BoardPagingDTO vo, ModelAndView mv){
 

@@ -113,9 +113,10 @@
 					패키지- 채팅화면</a></li>
 			<li><a href="./getMemberList.do">com.springmvc.test.web.paging
 					패키지- 회원목록화면-페이징</a></li>
-			<li><a href="./getJsonMemberList.do">com.springmvc.test.web.jackson
+	
+			<li><a href="./getJsonMemberList.do" onclick="window.open(this.href,'_blank','width=800,height=600, location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, scrollbars=yes');return false;">com.springmvc.test.web.jackson
 					패키지- 자바객체-JSON 형변환 </a></li>
-			<li><a href="./getJsonMemberList2.do">com.springmvc.test.web.jackson
+			<li><a href="./getJsonMemberList2.do" onclick="window.open(this.href,'_blank','width=800,height=600, location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, scrollbars=yes');return false;">com.springmvc.test.web.jackson
 					패키지- 자바객체-XML 형변환 </a></li>
 			<li><a href="./Arithmetic.do">com.springmvc.test.web.exception
 					패키지- 수학에러발생</a> <a href="./NullPointer.do">com.springmvc.test.web.exception
@@ -142,7 +143,8 @@
 			<li><a href="./getBoardList.do"> com.springmvc.test.web.comments
 					패키지 - 댓글기능 - 게시글 조회</a></li>
 			<li><a href="./users"> com.springmvc.test.web.rest
-					패키지 - rest방식의 crud 수행(Rest Api)</a></li>			
+					패키지 - rest방식의 crud 수행(Rest Api)</a></li>
+			<li><a href="./modify/user19"> 회원수정페이지 </a></li>					
 		</ul>
 	</div>
 </body>
