@@ -13,7 +13,7 @@
 		<org.springframework-version>4.2.4.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
-		<org.apache.tiles-version>3.0.8</org.apache.tiles-version>
+		<!-- <org.apache.tiles-version>3.0.8</org.apache.tiles-version> -->
 	</properties>
 
 	<!-- ${project.basedir} 은 pom.xml 파일이 존재하는 프로젝트의 이름을 가져온다 -->
@@ -339,17 +339,17 @@
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-core</artifactId>
-			<version>${org.apache.tiles-version}</version>
+			<version>3.0.8</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-servlet</artifactId>
-			<version>${org.apache.tiles-version}</version>
+			<version>3.0.8</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-extras</artifactId>
-			<version>${org.apache.tiles-version}</version>
+			<version>3.0.8</version>
 		</dependency>
  
 	</dependencies>
