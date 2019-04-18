@@ -337,7 +337,7 @@
 
 		<!-- 스프링 타일즈 -->
 		<!-- 현재 등록되어 있는 slf4j와 타일즈의 slf4j와 충돌이 일어나므로 타일즈의 slf4j를 의존성처리 하지 않도록 제외 처리해준다. -->
-		<dependency>
+		<dependency> 
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-core</artifactId>
 			<version>${org.apache.tiles-version}</version>
