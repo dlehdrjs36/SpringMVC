@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 스프링과 JPA 연동 설정 -->
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
+	
+	<bean id="dataSourceJPA"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@localhost:1521:XE" />
+		<property name="username" value="boardtest" />
+		<property name="password" value="boardtest" />
+	</bean>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	    <property name="dataSource" ref="dataSourceJPA"></property>
+	    <property name="jpaVendorAdapter" ref="jpaVendorAdapter"></property>
+	    
+	    <!-- 해당 Path에 있는 Entity 탐색. -->
+	    <property name="packagesToScan" value="com.springmvc.test.web"></property>
+	    <property name="jpaProperties">
+			<props>	    
+			<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+			<prop key="hibernate.show_sql">true</prop>
+			<prop key="hibernate.format_sql">true</prop>
+			<prop key="hibernate.use_sql_comments">false</prop>
+			<prop key="hibernate.id.new_generator_mappings">true</prop>
+			<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+	    </property>
+	</bean>
+
+</beans>
